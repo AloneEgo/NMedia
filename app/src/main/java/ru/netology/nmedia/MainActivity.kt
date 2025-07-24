@@ -13,16 +13,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val post = Post(
-                id = 1,
-                author = "Нетология. Университет интернет-профессий будущего",
-                published= "21 мая в 18:36",
-                content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-                likes = 999,
-                shares = 10,
-                views = 1_200_000
+            id = 1,
+            author = "Нетология. Университет интернет-профессий будущего",
+            published = "21 мая в 18:36",
+            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
+            likes = 999,
+            shares = 10,
+            views = 1_200_000
         )
 
-        with(binding){
+        with(binding) {
             author.text = post.author
             published.text = post.published
             content.text = post.content
@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
             likes.setImageResource(R.drawable.ic_favorite_24)
             likes.setOnClickListener {
                 post.likeByMe = !post.likeByMe
-                if (post.likeByMe){
+                if (post.likeByMe) {
                     likes.setImageResource(R.drawable.ic_liked_24)
                     post.likes++
-                } else{
+                } else {
                     likes.setImageResource(R.drawable.ic_favorite_24)
                     post.likes--
                 }
@@ -48,6 +48,5 @@ class MainActivity : AppCompatActivity() {
                 shareCount.text = NumberFormatter.format(post.shares)
             }
         }
-
     }
 }
