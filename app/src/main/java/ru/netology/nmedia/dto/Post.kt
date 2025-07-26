@@ -5,8 +5,8 @@ data class Post(
     val author: String,
     val published: String,
     val content: String,
-    var likes: Int = 0,
-    var shares: Int = 0,
-    var views: Int = 0,
-    var likeByMe: Boolean = false
+    val likes: Int = 0,
+    val shares: Int = 0,
+    val views: Int = 0,
+    val likeByMe: Boolean = false
 )
