@@ -2,4 +2,8 @@
 <resources>
     <string name="app_name">НМедиа</string>
     <string name="hello">НМедиа!</string>
+    <string name="avatar">Аватар</string>
+    <string name="menuButton">Кнопка меню</string>
+    <string name="likesCount">Счетчик лайков</string>
+    <string name="shareCounter">Счетчик поделившихся</string>
 </resources>

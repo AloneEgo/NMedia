@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Nmedia</string>
     <string name="hello">Hello World!</string>
+    <string name="avatar">Avatar</string>
+    <string name="menuButton">Menu button</string>
+    <string name="likesCount">Likes counter</string>
+    <string name="shareCounter">Share counter</string>
 </resources>
