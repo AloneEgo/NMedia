@@ -15,13 +15,9 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d("MainActivity", "MainActivity hashcode: ${this.hashCode()}")
-        Log.d("MainActivity", "onCreate")
-
         val viewModel: PostViewModel by viewModels()
-        Log.d("MainActivity", "viewModel hashcode: ${viewModel.hashCode()}")
 
-        viewModel.data.observe(this){post ->
+        viewModel.data.observe(this) { post ->
 
             with(binding) {
                 author.text = post.author
@@ -30,12 +26,9 @@ class MainActivity : AppCompatActivity() {
                 likesCount.text = NumberFormatter.format(post.likes)
                 shareCount.text = NumberFormatter.format(post.shares)
                 viewsCount.text = NumberFormatter.format(post.views)
-                if (post.likeByMe) {
-                    likes.setImageResource(R.drawable.ic_liked_24)
-                } else {
-                    likes.setImageResource(R.drawable.ic_favorite_24)
-                }
+                likes.setImageResource((if (post.likeByMe) R.drawable.ic_liked_24 else R.drawable.ic_favorite_24))
             }
+        }
 
             binding.likes.setOnClickListener {
                 viewModel.like()
@@ -44,7 +37,5 @@ class MainActivity : AppCompatActivity() {
             binding.share.setOnClickListener {
                 viewModel.share()
             }
-
-        }
     }
 }
