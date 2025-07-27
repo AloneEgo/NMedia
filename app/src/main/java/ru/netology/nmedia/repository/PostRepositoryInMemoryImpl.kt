@@ -71,21 +71,6 @@ class PostRepositoryInMemoryImpl: PostRepository {
     )
     private val data = MutableLiveData(posts)
 
-//    override fun get(): LiveData<Post> = data
-
-//    override fun like() {
-//        post = post.copy(
-//            likeByMe = !post.likeByMe,
-//            likes = if (post.likeByMe){
-//                post.likes - 1
-//            } else {
-//                post.likes + 1
-//            }
-//        )
-//
-//        data.value = post
-//    }
-
 //    override fun share() {
 //        post = post.copy(
 //            shares = post.shares + 1
