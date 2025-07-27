@@ -12,5 +12,5 @@ class PostViewModel : ViewModel() {
     val data: LiveData<List<Post>> = repository.getAll()
 
     fun like(id: Long) = repository.likeById(id)
-//    fun share() = repository.share()
+    fun share(id: Long) = repository.share(id)
 }

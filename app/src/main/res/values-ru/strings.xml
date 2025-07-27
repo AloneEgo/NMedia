@@ -6,4 +6,5 @@
     <string name="menuButton">Кнопка меню</string>
     <string name="likesCount">Счетчик лайков</string>
     <string name="shareCounter">Счетчик поделившихся</string>
+    <string name="viewsCount">Счетчик просмотров</string>
 </resources>

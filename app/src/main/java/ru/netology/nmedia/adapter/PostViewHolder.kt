@@ -8,7 +8,8 @@ import ru.netology.nmedia.util.NumberFormatter
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener
+    private val onLikeListener: OnLikeListener,
+    private val onShareListener: OnShareListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -23,6 +24,9 @@ class PostViewHolder(
             )
             likes.setOnClickListener {
                 onLikeListener(post)
+            }
+            share.setOnClickListener {
+                onShareListener(post)
             }
         }
     }
