@@ -5,4 +5,5 @@
     <string name="menuButton">Menu button</string>
     <string name="likesCount">Likes counter</string>
     <string name="shareCounter">Share counter</string>
+    <string name="viewsCount">Views count</string>
 </resources>

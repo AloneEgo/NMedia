@@ -1,41 +1,34 @@
 package ru.netology.nmedia.activity
 
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.NumberFormatter
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
+    val viewModel: PostViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel: PostViewModel by viewModels()
-
-        viewModel.data.observe(this) { post ->
-
-            with(binding) {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                likesCount.text = NumberFormatter.format(post.likes)
-                shareCount.text = NumberFormatter.format(post.shares)
-                viewsCount.text = NumberFormatter.format(post.views)
-                likes.setImageResource((if (post.likeByMe) R.drawable.ic_liked_24 else R.drawable.ic_favorite_24))
+        val adapter = PostAdapter(
+            onLikeListener = { post ->
+                viewModel.like(post.id)
+                             },
+            onShareListener = { post ->
+                viewModel.share(post.id)
             }
+        )
+
+        binding.list.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
         }
-
-            binding.likes.setOnClickListener {
-                viewModel.like()
-            }
-
-            binding.share.setOnClickListener {
-                viewModel.share()
-            }
     }
 }
