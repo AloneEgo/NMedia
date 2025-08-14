@@ -7,4 +7,11 @@
     <string name="likesCount">Счетчик лайков</string>
     <string name="shareCounter">Счетчик поделившихся</string>
     <string name="viewsCount">Счетчик просмотров</string>
+    <string name="menu_remove">Удалить</string>
+    <string name="post_text">Текст</string>
+    <string name="error_empty_content">Текст не может быть пустым</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="cancel_edit">Отмена редактирования</string>
+    <string name="Edit_message">Редактировать пост</string>
+    <string name="edit_icon">Иконка редактирования</string>
 </resources>
