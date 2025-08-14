@@ -16,16 +16,20 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
+
             likes.text = NumberFormatter.format(post.likes)
-            shareCount.text = NumberFormatter.format(post.shares)
-            viewsCount.text = NumberFormatter.format(post.views)
             likes.isChecked = post.likeByMe
             likes.setOnClickListener {
                 onInteractionListener.like(post)
             }
+
+            share.text = NumberFormatter.format(post.shares)
             share.setOnClickListener {
                 onInteractionListener.share(post)
             }
+
+            views.text = NumberFormatter.format(post.views)
+
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.post_menu)
