@@ -23,8 +23,11 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val postLauncher = registerForActivityResult(PostContract){result ->
-            result ?: return@registerForActivityResult
-            viewModel.save(result)
+            if (result == null) {
+                viewModel.cancelEdit()
+            } else {
+                viewModel.save(result)
+            }
         }
 
         val adapter = PostAdapter(object : OnInteractionListener{
@@ -55,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onVideoPlay(post: Post) {
                 val intent = Intent(Intent.ACTION_VIEW, post.video.toString().toUri())
-                if (intent.resolveActivity(packageManager) != null) {
+                if (packageManager != null) {
                     startActivity(intent)
                 } else {
                     Toast.makeText(this@MainActivity, "Не найдено приложение для открытия видео", Toast.LENGTH_SHORT).show()
