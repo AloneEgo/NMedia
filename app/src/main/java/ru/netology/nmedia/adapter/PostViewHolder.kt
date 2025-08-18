@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
@@ -29,6 +30,20 @@ class PostViewHolder(
             }
 
             views.text = NumberFormatter.format(post.views)
+
+            if (post.video.isNullOrBlank()){
+                videoPreview.visibility = View.GONE
+            } else {
+                videoPreview.visibility = View.VISIBLE
+            }
+
+            videoThumbnail.setOnClickListener {
+                onInteractionListener.onVideoPlay(post)
+            }
+
+            videoPlayButton.setOnClickListener {
+                onInteractionListener.onVideoPlay(post)
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
