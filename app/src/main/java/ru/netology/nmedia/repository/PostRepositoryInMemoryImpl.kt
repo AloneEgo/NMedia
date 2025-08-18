@@ -31,7 +31,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likes = 10,
             shares = 12323,
             views = 10_200_000,
-            likeByMe = true
+            likeByMe = true,
+            video = "https://rutube.ru/video/1e56ff8b172b2cd085945aacd50347c5/"
         ), Post(
             id = 102,
             author = "Нетология. Университет интернет-профессий будущего",
@@ -57,7 +58,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             published = "21 мая в 21:36",
             likes = 35459,
             shares = 10,
-            views = 1_200_000
+            views = 1_200_000,
+            video = "https://rutube.ru/video/12b5683ad278231d97f0432573d23f24/"
         ),
         Post(
             id = 105,

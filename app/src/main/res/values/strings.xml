@@ -13,4 +13,8 @@
     <string name="cancel_edit">Cancel edit</string>
     <string name="Edit_message">Edit message</string>
     <string name="edit_icon">Edit icon</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="add_post">Add new post</string>
+    <string name="play_button">Play button</string>
+    <string name="video_preview">Video preview</string>
 </resources>

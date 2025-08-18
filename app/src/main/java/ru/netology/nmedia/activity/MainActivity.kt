@@ -1,17 +1,17 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.viewModel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val postLauncher = registerForActivityResult(PostContract){result ->
+            result ?: return@registerForActivityResult
+            viewModel.save(result)
+        }
 
         val adapter = PostAdapter(object : OnInteractionListener{
             override fun like(post: Post) {
@@ -34,10 +38,28 @@ class MainActivity : AppCompatActivity() {
 
             override fun edit(post: Post) {
                 viewModel.edit(post)
+                postLauncher.launch(post.content)
             }
 
             override fun share(post: Post) {
                 viewModel.share(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                }
+
+                val chooser = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(chooser)
+            }
+
+            override fun onVideoPlay(post: Post) {
+                val intent = Intent(Intent.ACTION_VIEW, post.video.toString().toUri())
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this@MainActivity, "Не найдено приложение для открытия видео", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
@@ -52,37 +74,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.edited.observe(this){ post ->
-            if (post.id == 0L) {
-                binding.editGroup.visibility = View.GONE
-            } else {
-                binding.editGroup.visibility = View.VISIBLE
-                binding.editSourceText.text = post.content
-                binding.content.setText(post.content)
-                binding.content.requestFocus()
-                AndroidUtils.showKeyboard(binding.content)
-            }
+
+        binding.add.setOnClickListener {
+            postLauncher.launch(null)
         }
 
-        binding.cancelEditButton.setOnClickListener {
-            viewModel.cancelEdit()
-            binding.content.setText("")
-            binding.content.clearFocus()
-            AndroidUtils.hideKeyboard(it)
-        }
-
-        binding.save.setOnClickListener {
-            val text = binding.content.text.toString()
-            if (text.isBlank()){
-                Toast.makeText(this@MainActivity, R.string.error_empty_content, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            viewModel.save(text)
-
-            binding.content.setText("")
-            binding.content.clearFocus()
-
-            AndroidUtils.hideKeyboard(binding.content)
-        }
     }
 }
