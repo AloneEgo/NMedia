@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val postLauncher = registerForActivityResult(PostContract){result ->
+        val postLauncher = registerForActivityResult(PostContract) { result ->
             if (result == null) {
                 viewModel.cancelEdit()
             } else {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = PostAdapter(object : OnInteractionListener{
+        val adapter = PostAdapter(object : OnInteractionListener {
             override fun like(post: Post) {
                 viewModel.like(post.id)
             }
@@ -61,7 +61,11 @@ class MainActivity : AppCompatActivity() {
                 if (packageManager != null) {
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@MainActivity, "Не найдено приложение для открытия видео", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Не найдено приложение для открытия видео",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
