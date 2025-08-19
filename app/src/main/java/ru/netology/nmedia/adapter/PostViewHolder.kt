@@ -31,7 +31,7 @@ class PostViewHolder(
 
             views.text = NumberFormatter.format(post.views)
 
-            if (post.video.isNullOrBlank()){
+            if (post.video.isNullOrBlank()) {
                 videoPreview.visibility = View.GONE
             } else {
                 videoPreview.visibility = View.VISIBLE
@@ -49,15 +49,17 @@ class PostViewHolder(
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.post_menu)
                     setOnMenuItemClickListener { item ->
-                        when (item.itemId){
+                        when (item.itemId) {
                             R.id.remove -> {
                                 onInteractionListener.remove(post)
                                 true
                             }
+
                             R.id.edit -> {
                                 onInteractionListener.edit(post)
                                 true
                             }
+
                             else -> false
                         }
                     }

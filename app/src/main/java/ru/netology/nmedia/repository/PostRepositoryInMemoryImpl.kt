@@ -77,8 +77,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
         posts = posts.map {
             if (it.id != id) it else it.copy(
                 shares = it.shares + 1
-        )
-            }
+            )
+        }
         data.value = posts
     }
 
@@ -109,7 +109,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                 )
             ) + posts
         } else {
-            posts.map{ if (it.id != post.id) it else it.copy(content = post.content)}
+            posts.map { if (it.id != post.id) it else it.copy(content = post.content) }
         }
         data.value = posts
     }

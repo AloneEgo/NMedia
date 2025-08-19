@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 
-interface OnInteractionListener{
+interface OnInteractionListener {
     fun like(post: Post)
     fun remove(post: Post)
     fun edit(post: Post)
@@ -16,7 +16,7 @@ interface OnInteractionListener{
 
 class PostAdapter(
     private val onInteractionListener: OnInteractionListener
-): ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
