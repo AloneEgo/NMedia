@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.FeedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@id/edit_panel_top_barrier"
         app:layout_constraintBottom_toTopOf="@id/edit_source_text"
         app:layout_constraintStart_toEndOf="@id/edit_icon"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/edit_source_text"

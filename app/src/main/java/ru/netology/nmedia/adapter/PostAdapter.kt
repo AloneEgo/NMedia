@@ -12,6 +12,7 @@ interface OnInteractionListener {
     fun edit(post: Post)
     fun share(post: Post)
     fun onVideoPlay(post: Post)
+    fun onPostClick(post: Post)
 }
 
 class PostAdapter(

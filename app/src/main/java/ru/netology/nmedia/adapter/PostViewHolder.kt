@@ -65,6 +65,8 @@ class PostViewHolder(
                     }
                 }.show()
             }
+
+            itemView.setOnClickListener { onInteractionListener.onPostClick(post) }
         }
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/common_spacing"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.AppActivity">
 
 
     <ImageView
@@ -95,7 +95,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/video_preview"
-            android:contentDescription="@string/video_preview"/>
+            android:contentDescription="@string/video_preview" />
 
         <ImageButton
             android:id="@+id/video_play_button"
@@ -104,7 +104,7 @@
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_play_circle_outline_48"
-            android:contentDescription="@string/play_button"/>
+            android:contentDescription="@string/play_button" />
 
     </FrameLayout>
 
