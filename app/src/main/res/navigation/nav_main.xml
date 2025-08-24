@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_single_post">
         <argument
             android:name="postId"
-            app:argType="long"/>
+            app:argType="long" />
         <action
             android:id="@+id/action_singlePostFragment_to_newPostFragment"
             app:destination="@id/newPostFragment" />
