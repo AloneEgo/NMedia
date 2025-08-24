@@ -1,47 +1,37 @@
 package ru.netology.nmedia.repository
 
+
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
 import ru.netology.nmedia.dao.PostDao
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.entity.toEntity
 
-class PostRepositorySQLiteImpl(
+class PostRepositoryImpl(
     private val dao: PostDao
 ) : PostRepository {
 
-    private var posts = emptyList<Post>()
-    private val data = MutableLiveData(posts)
+    override fun getAll(): LiveData<List<Post>> = dao.getAll().map { listPost ->
+        listPost.map { entity ->
+            entity.toDto()
+        }
 
-    init {
-        posts = dao.getAll()
-        data.value = posts
     }
-
-    private fun sync() {
-        posts = dao.getAll()
-        data.value = posts
-    }
-
-    override fun getAll(): LiveData<List<Post>> = data
 
     override fun likeById(id: Long) {
         dao.likeById(id)
-        sync()
     }
 
     override fun removeById(id: Long) {
         dao.removeById(id)
-        sync()
     }
 
     override fun save(post: Post) {
-        dao.save(post)
-        sync()
+        dao.save(post.toEntity())
     }
 
     override fun share(id: Long) {
         dao.share(id)
-        sync()
     }
 
 }
