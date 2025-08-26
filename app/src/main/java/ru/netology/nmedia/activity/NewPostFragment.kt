@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -24,7 +25,11 @@ class NewPostFragment : Fragment() {
 
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
 
-        arguments?.textArg?.let { binding.content.setText(it) }
+        arguments?.textArg?.let {
+            binding.content.setText(it)
+        } ?: run {
+            binding.content.setText(viewModel.getDraft())
+        }
 
         binding.content.requestFocus()
         AndroidUtils.showKeyboard(binding.content)
@@ -36,8 +41,17 @@ class NewPostFragment : Fragment() {
         }
 
         binding.back.setOnClickListener {
-            viewModel.cancelEdit()
+            viewModel.saveDraft(binding.content.text.toString())
+            AndroidUtils.hideKeyboard(requireView())
             findNavController().navigateUp()
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            viewModel.saveDraft(binding.content.text.toString())
+            if (isEnabled) {
+                isEnabled = false
+                findNavController().navigateUp()
+            }
         }
 
         return binding.root

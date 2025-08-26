@@ -17,7 +17,7 @@ import ru.netology.nmedia.databinding.FragmentSinglePostBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewModel.PostViewModel
 
-class SinglePostFragment: Fragment() {
+class SinglePostFragment : Fragment() {
 
     private val viewModel: PostViewModel by activityViewModels()
 
