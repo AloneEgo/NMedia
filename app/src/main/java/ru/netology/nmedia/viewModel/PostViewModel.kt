@@ -8,7 +8,7 @@ import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.DraftRepository
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQLiteImpl
+import ru.netology.nmedia.repository.PostRepositoryImpl
 
 private val empty = Post(
     id = 0,
@@ -22,10 +22,10 @@ private val empty = Post(
 class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: PostRepository =
-        PostRepositorySQLiteImpl(AppDb.getInstance(application).postDao)
+        PostRepositoryImpl(AppDb.getInstance(application).postDao())
 
     private val draftRepository = DraftRepository(application)
-    val draftContent: LiveData<String> = draftRepository.get()
+//    val draftContent: LiveData<String> = draftRepository.get()
 
     val data = repository.getAll()
     val edited = MutableLiveData(empty)
@@ -54,9 +54,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun saveDraft(content: String) {
-        if (edited.value?.id == 0L) {
-            draftRepository.save(content)
-        }
+        draftRepository.save(content)
     }
 
     fun getDraft(): String? {

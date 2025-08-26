@@ -1,9 +1,9 @@
 package ru.netology.nmedia.repository
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.core.content.edit
 
 class DraftRepository(context: Context) {
     private val prefs = context.getSharedPreferences("drafts", Context.MODE_PRIVATE)
