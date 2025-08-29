@@ -19,11 +19,11 @@ jobs:
         with:
           java-version: 17
   
-      - name: Create google-services.json
+      - name: Decode google-services.json
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
         run: |
-          echo '${{ secrets.FIREBASE_SECRET }}' > ./app/google-services.json
+          echo "$FIREBASE_SECRET" | base64 -d > ./app/google-services.json
 
       - name: Build
         run: |
